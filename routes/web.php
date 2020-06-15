@@ -11,12 +11,14 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+Auth::routes();
 
-Route::group(['prefix' => 'todos'], function () {
-    Route::get('index', 'TodoController@index')->name('todos.index');
+Route::get('/', 'TodoController@index')->name('todos.index');
+
+Route::group(['prefix' => 'todos', 'middleware' => 'auth'], function () {
     Route::get('create', 'TodoController@create')->name('todos.create');
     Route::post('store', 'TodoController@store')->name('todos.store');
     Route::get('show/{id}', 'TodoController@show')->name('todos.show');
@@ -24,7 +26,5 @@ Route::group(['prefix' => 'todos'], function () {
     Route::post('update/{id}', 'TodoController@update')->name('todos.update');
     Route::post('destroy/{id}', 'TodoController@destroy')->name('todos.destroy');
 });
-
-Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');

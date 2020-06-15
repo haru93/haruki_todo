@@ -26,7 +26,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+        return view('todos.create');
     }
 
     /**
@@ -37,7 +37,12 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $todo = $request->all();
+        unset($todo['_token']);
+
+        Todo::insert($todo);
+
+        return redirect('/');
     }
 
     /**
@@ -48,7 +53,9 @@ class TodoController extends Controller
      */
     public function show($id)
     {
-        //
+        $todo = Todo::find($id);
+
+        return view('todos.show', compact('todo'));
     }
 
     /**
@@ -59,7 +66,9 @@ class TodoController extends Controller
      */
     public function edit($id)
     {
-        //
+        $todo = Todo::find($id);
+        
+        return view('todos.edit', compact('todo'));
     }
 
     /**
@@ -71,7 +80,13 @@ class TodoController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $todo = Todo::find($id);
+
+        $todo->body = $request->input('body');
+
+        $todo->save();
+
+        return redirect('/');
     }
 
     /**
@@ -82,6 +97,9 @@ class TodoController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $todo = Todo::find($id);
+        $todo->delete();
+
+        return redirect('/');
     }
 }
