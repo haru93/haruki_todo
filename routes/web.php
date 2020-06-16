@@ -26,7 +26,7 @@ Route::group(['prefix' => 'todos', 'middleware' => 'auth'], function () {
     Route::post('update/{id}', 'TodoController@update')->name('todos.update');
     Route::post('destroy/{id}', 'TodoController@destroy')->name('todos.destroy');
     Route::get('restore/{id}', 'TodoController@restore')->name('todos.restore');
-    
+    Route::get('forceDelete/{id}', 'TodoController@forceDelete')->name('todos.forceDelete');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

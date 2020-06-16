@@ -113,4 +113,12 @@ class TodoController extends Controller
 
         return redirect('/');
     }
+    
+    public function forceDelete($id)
+    {
+        $todo = Todo::onlyTrashed()->find($id);
+        $todo->forceDelete();
+        
+        return redirect('/');
+    }
 }

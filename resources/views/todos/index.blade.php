@@ -19,10 +19,11 @@
         @foreach($deleted as $delete)
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">削除済メモ</div>
+                    <div class="card-header">ゴミ箱入りメモ</div>
                     <div class="card-body">
                         {{ $delete->body }}
                         <a href="{{ route('todos.restore', ['id' => $delete->id ]) }}">復旧</a>
+                        <a href="{{ route('todos.forceDelete', ['id' => $delete->id ]) }}">完全削除</a>
                     </div>
                 </div>
             </div>
