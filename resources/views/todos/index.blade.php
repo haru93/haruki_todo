@@ -22,7 +22,7 @@
                     <div class="card-header">削除済メモ</div>
                     <div class="card-body">
                         {{ $delete->body }}
-                        {{-- <a href="{{ route('todos.show', ['id' => $todo->id ]) }}">詳細をみる</a> --}}
+                        <a href="{{ route('todos.restore', ['id' => $delete->id ]) }}">復旧</a>
                     </div>
                 </div>
             </div>
