@@ -41,9 +41,9 @@ class TodoController extends Controller
     public function store(Request $request)
     {
         $todo = $request->all();
-        unset($todo['_token']);
+        $data = ['user_id' => \Auth::id(), 'body' => $todo['body']];
 
-        Todo::insert($todo);
+        Todo::insert($data);
 
         return redirect('/');
     }
@@ -84,9 +84,9 @@ class TodoController extends Controller
     public function update(Request $request, $id)
     {
         $todo = Todo::find($id);
-
+        
         $todo->body = $request->input('body');
-
+        
         $todo->save();
 
         return redirect('/');
